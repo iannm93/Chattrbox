@@ -6,11 +6,10 @@ import { ChatEngine } from 'react-chat-engine'
 export function App() {
   return (
     <ChatEngine
-    height = "100vh"
-      publicKey={process.env.PUBLICKEY_ID}
-      projectID= {process.env.PROJECT_ID}
-      userName={process.env.USERNAME}
-      userSecret={process.env.USER_SECRET}
+      height = "100vh"
+      projectID= "14530bfe-8c29-4e09-8c9a-dc073116e156"
+      userName="Ian"
+      userSecret="bananaboy10"
     />
   )
 }
