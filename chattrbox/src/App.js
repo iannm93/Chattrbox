@@ -2,9 +2,13 @@ import React from 'react'
 import "./App.css"; 
 import { ChatEngine} from 'react-chat-engine'
 import Feed from "./components/Feed"
+import Login from "./components/Login"
+import "./App.css"
+ 
 
-
-export function App() {
+const App= () =>{
+  // if the user does not have a username stored in local storage, reutnr the login form
+  if (!localStorage.getItem('username')) return <Login />;
   return (
     <ChatEngine
     height = "100vh"
@@ -12,7 +16,7 @@ export function App() {
     userName="Ian"
     userSecret="bananaboy10"
     renderChatFeed = {(props) => <Feed {... props} />}
-    
+    onNewMessage={() => new Audio('https://chat-engine-assets.s3.amazonaws.com/click.mp3').play()}
     />
     
     

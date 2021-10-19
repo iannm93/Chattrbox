@@ -9,6 +9,19 @@ const Feed = (props) => {
     // checking to see if chats exist, then looking for specific active chat
     const chat = chats && chats[activeChat]
 
+
+
+    const renderWhenRead = (message, ifMyMessage) => chat.people.map((person, index) => person.last_read === message.id && (
+        <div
+            key={`read_${index}`}
+            className="read-receipt"
+            style={{
+                float: ifMyMessage ? 'right' : 'left',
+                backgroundImage: person.person.avatar && `url(${person.person.avatar})`,
+            }}
+        />
+    ));
+
     // console.log(chat, userName, messages)
     // function for generatiing messages
     const loadMessage = () => {
@@ -29,13 +42,14 @@ const Feed = (props) => {
                         {/* if not my message, render guest message */}
                         {
                             ifMyMessage
-                                ? <MyMessage message = {message} />
-                                : <GuestMessage message ={message} lastMessage = {messages[finalMessage]} />
+                                ? <MyMessage message={message} />
+                                : <GuestMessage message={message} lastMessage={messages[finalMessage]} />
                         }
 
                     </div>
-                    <div className="read-receipts" style={{ marginRight: ifMyMessage ? '18px' : '0px', marginLeft: ifMyMessage ? '18px' : '65px' }}>
-                        
+                    <div className="read-receipts" style={{ marginRight: ifMyMessage ? '18px' : '0px', marginLeft: ifMyMessage ? '18px' : '68px' }}>
+                        {renderWhenRead(message, ifMyMessage)}
+
                     </div>
 
                 </div>
@@ -43,7 +57,7 @@ const Feed = (props) => {
         })
 
     }
-    
+
     if (!chat) {
         return "Loading, please wait..."
     }
@@ -59,8 +73,8 @@ const Feed = (props) => {
             </div>
             {loadMessage()}
             <div style={{ height: "100px" }} />
-            <div className = "message-form-container">
-                <Message {... props} chatId={activeChat}/>
+            <div className="message-form-container">
+                <Message {...props} chatId={activeChat} />
             </div>
         </div>
     )

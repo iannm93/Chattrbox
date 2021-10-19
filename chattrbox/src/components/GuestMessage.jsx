@@ -1,9 +1,9 @@
 const GuestMessage = ({ lastMessage, message }) => {
-    const isFirstMessageByUser = !lastMessage || lastMessage.sender.username !== message.sender.username;
+    const checkIfFirstMessageByUser = !lastMessage || lastMessage.sender.username !== message.sender.username;
   
     return (
       <div className="message-row">
-        {isFirstMessageByUser && (
+        {checkIfFirstMessageByUser && (
           <div
             className="message-avatar"
             // set user's avatar if they have one
@@ -16,11 +16,11 @@ const GuestMessage = ({ lastMessage, message }) => {
               src={message.attachments[0].file}
               alt="message-attachment"
               className="message-image"
-              style={{ marginLeft: isFirstMessageByUser ? '4px' : '48px' }}
+              style={{ marginLeft: checkIfFirstMessageByUser ? '4px' : '48px' }}
             />
           )
           : (
-            <div className="message" style={{ float: 'left', backgroundColor: '#CABCDC', marginLeft: isFirstMessageByUser ? '4px' : '48px' }}>
+            <div className="message" style={{ float: 'left', backgroundColor: '#CABCDC', marginLeft: checkIfFirstMessageByUser ? '4px' : '48px' }}>
               {message.text}
             </div>
           )}
