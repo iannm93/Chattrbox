@@ -9,19 +9,25 @@ const Feed = (props) => {
     // checking to see if chats exist, then looking for specific active chat
     const chat = chats && chats[activeChat]
 
+        //render the read receipts 
+    const renderSendReceipts = (message, ifMyMessage) =>{
+        // map through people, check if the person has read it
+            return chat.people.map((person, index)=> person.last_read=== message.id && (
+                <div
+                // if thes mssage has been read, set the class name 
+                key ={`read_${index}`}
+                className = "read-receipt"
+                style = {{
+                        // if my message, float right, otherwise left
+                        float: ifMyMessage? "right" : "left",
+                        backgroundImage: `url(${person.person.avatar})`
+                }}
 
+                />
+            ))
+    }
 
-    const renderWhenRead = (message, ifMyMessage) => chat.people.map((person, index) => person.last_read === message.id && (
-        <div
-            key={`read_${index}`}
-            className="read-receipt"
-            style={{
-                float: ifMyMessage ? 'right' : 'left',
-                backgroundImage: person.person.avatar && `url(${person.person.avatar})`,
-            }}
-        />
-    ));
-
+ 
     // console.log(chat, userName, messages)
     // function for generatiing messages
     const loadMessage = () => {
@@ -48,7 +54,7 @@ const Feed = (props) => {
 
                     </div>
                     <div className="read-receipts" style={{ marginRight: ifMyMessage ? '18px' : '0px', marginLeft: ifMyMessage ? '18px' : '68px' }}>
-                        {renderWhenRead(message, ifMyMessage)}
+                        {renderSendReceipts(message, ifMyMessage)}
 
                     </div>
 
