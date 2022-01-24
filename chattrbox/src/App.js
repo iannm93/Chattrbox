@@ -6,8 +6,8 @@ import Login from "./components/Login"
 import "./App.css"
  
 
-const App= () =>{
-  // if the user does not have a username stored in local storage, reutnr the login form
+const App = () =>{
+  // if the user does not have a username stored in local storage, reutrN the login component 
   if (!localStorage.getItem('username')) return <Login />;
   return (
     <ChatEngine

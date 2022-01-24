@@ -23,7 +23,7 @@ const Message = (props) => {
       sendMessage(creds, chatId, { text });
     }
 
-    setValue('');
+    setValue('');7
   };
 
   const handleUpload = (e) => {
